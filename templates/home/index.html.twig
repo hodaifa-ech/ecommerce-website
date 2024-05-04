@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+{% endblock %}
+{% block panier%}
+	<ul class="navbar-nav  mb-2 mb-lg-0">
+		<li class="nav-item">
+			<a class="nav-link active mx-5" aria-current="page" href="{{path('user_panier')}}">
+				<button type="button" class="btn btn-dark position-relative">
+					<i class="fa-solid fa-cart-shopping"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+						{{panier|length }}
+						<span class="visually-hidden">Product</span>
+					</span>
+				</button>
+			</a>
+		</li>
+
+	</ul>
+{% endblock %}
+{% block body %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endfor %}
+	<div class="row my-5">
+		<div class="col-md-12">
+			<div class="my-3 d-flex justify-content-between align-items-center">
+				<button type="button" class="btn btn-dark position-relative">
+					Products
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+						{{products|length }}
+						<span class="visually-hidden">Product</span>
+					</span>
+				</button>
+				<div>
+					<a href="{{path('app_home')}}" class="btn btn-sm btn-outline-dark">All</a>
+					{% for category in categorys %}
+						<a href="{{path('product_category',{id:category.id})}}" class="btn btn-sm btn-outline-dark">{{category.name}}</a>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="row">
+				{% if products|length %}
+
+					{% for product in products %}
+						<div class="col-md-4">
+							<div class="card" style="width: 18rem;height: 100%;">
+								{% if product.image %}
+									<img src="{{asset('uploads/'~product.image)}}" alt="product_image" class="card-img-top ">
+								{% else %}
+									<img src="{{asset('uploads/'~'1313891.png')}}" alt="" class="card-img-top ">
+								{% endif %}
+
+								<div class="card-body">
+									<h5 class="card-title">{{product.name}}</h5>
+									<p class="card-text">{{product.description}}</p>
+									<h5 class="text text-danger ">{{product.price}}DH</h5>
+									<a href="{{path('show_product',{id:product.id})}}" class="btn btn-sm btn-primary">view</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					<div class="alert alert-info">
+						no product
+					</div>
+				{% endif %}
+
+
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

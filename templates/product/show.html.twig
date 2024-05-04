@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{product.name}}
+{% endblock %}
+
+{% block body %}
+
+	<div class="row my-5 w-100">
+		<div class="col-md-12">
+
+			<div class="row">
+				{% if product%}
+
+
+					<div class="col-md-8">
+						<div class="card">
+							{% if product.image %}
+								<img src="{{asset('uploads/'~product.image)}}" alt="product_image" class="card-img-top " height="400">
+							{% else %}
+								<img src="{{asset('uploads/'~'1313891.png')}}" alt="" class="card-img-top " height="400">
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">{{product.name}}</h5>
+								<p class="card-text">{{product.description}}</p>
+								<h5 class="text text-danger ">{{product.price}}DH</h5>
+								<h5 class="text text-success ">{{product.category.name}}</h5>
+								<div class="my-3 d-flex justify-content-start align-items-center">
+
+									<div>
+										<a href="{{path('panier_store',{id: product.id})}}" class="btn btn-sm btn-outline-dark">ajouter ou  panier</a>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		{% else %}
+			<div class="alert alert-info">
+				no product
+			</div>
+		{% endif %}
+
+
+	</div>
+</div></div>{% endblock %}

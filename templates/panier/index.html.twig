@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}my panier
+{% endblock %}
+
+{% block body %}
+	<div class="row my-5">
+		<div class="col-md-10 mx-auto">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{message}}
+				</div>
+			{% endfor %}
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-item-center">
+					panier
+				</div>
+			</div>
+			<div class="card-body ">
+				<table class="table table-bordered table-hover ">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Product_name</th>
+							<th>Price</th>
+							<th>quantite</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody class="text-align--center">
+						{% set sum = 0 %}
+						{% set displayedOrders = [] %}
+						{% for order in user %}
+							{% set productName = order.getPname() %}
+							{% if productName not in displayedOrders %}
+								{% set displayedOrders = displayedOrders|merge([productName]) %}
+								{% set sum = sum + order.price * productQuantities[order.getPname()] %}
+								<tr>
+									<td>{{loop.index}}</td>
+									<td>{{order.getPname()}}</td>
+
+									<td>{{order.price * productQuantities[order.getPname()]}}</td>
+									<td>{{ productQuantities[order.getPname()] }}</td>
+									{# Afficher la quantité du produit #}
+
+
+								</tr>
+							{% endif %}
+
+
+						{% endfor %}
+
+
+						<tr class="text-center">
+							<th colspan="4">Total</th>
+							<th class="fw-blod">{{sum}}Dh</th>
+						</tr>
+						<tr class="text-center">
+							<th colspan="5">
+								<div>
+									<a href="{{path('order_store')}}" class="btn btn-sm btn-dark">order</a>
+
+								</div>
+							</th>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

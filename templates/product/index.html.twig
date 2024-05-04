@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Proudcts list
+{% endblock %}
+
+{% block body %}
+	<div class="row my-5">
+		<div class="col-md-10 mx-auto">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{message}}
+				</div>
+			{% endfor %}
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-item-center">
+					<span>List of product</span>
+					<a href="{{path('product_store')}}" class="btn btn-sm btn-primary">Add</a>
+				</div>
+			</div>
+			<div class="card-body ">
+				<table class="table table-bordered table-hover ">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Category</th>
+							<th>Quantity</th>
+							<th>price</th>
+							<th>Image</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody class="text-align--center">
+						{% for product in products %}
+							<tr>
+								<td>{{loop.index}}</td>
+								<td>{{product.name}}</td>
+								<td>{{product.category.name}}</td>
+								<td>{{product.quantite}}</td>
+								<td>{{product.price}}</td>
+								<td>
+									{% if product.image %}
+										<img src="{{asset('uploads/'~product.image)}}" width="60px" height="60px" alt="product_image" class="fluid my-2 rounded ">
+									{% else %}
+										null
+									{% endif %}
+
+								</td>
+								<td class="d-flex justify-content-around align-items-center">
+									<a href="{{path('show_product',{id:product.id})}}" class="btn btn-sm btn-dark">show</a>
+									<a href="{{path('product_edit',{id:product.id})}}" class="btn btn-sm btn-warning">edit</a>
+									<form id="{{product.id}}" action="{{path('product_delete',{id:product.id})}}" method="post"></form>
+									<button onclick="deleteItem('{{product.id}}')" class="btn btn-sm btn-danger">delete</button>
+
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

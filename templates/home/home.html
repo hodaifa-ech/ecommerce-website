@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="col-md-12">
+        <h1>Home Page</h1>
+    </div>
+    <div class="row my-4">
+        <div class="col md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    Create new product
+                </div>
+                <div class="card-body"></div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-item-center">
+            <span>List of product</span>
+            <a href="{{path('product_store')}}" class="btn btn-sm btnprimary">Add</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-borderd table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>price</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <div class="container " style="width: 10px; height: 10px;"></div>
+    <a href=""></a>
+</body>
+<div class="my-3 d-flex justify-content-between align-items-center">
+    <button type="button" class="btn btn-primary position-relative">
+        Products
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            99+
+            <span class="visually-hidden">unread messages</span>
+        </span>
+    </button>
+</div>
+<a href="{{path('home')}}" class="btn btn-sm btn-outline-dark"></a>
+<div class="row"></div>
+<div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">{{product.description}}</p>
+    <h5 class="text text-danger ">{{product.price}}DH</h5>
+    <a href="{{path('show_product',{id:product.id})}}" class="btn btn-sm btn-primary">view</a>
+</div>
+<div class="alert alert-info">
+    no product
+</div>
+<div class="row my-5">
+    <div class="col md-6 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                Register
+            </div>
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
